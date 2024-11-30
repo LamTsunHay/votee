@@ -1,0 +1,7 @@
+server:
+  servlet.context-path: /wordleBot
+  port: 8080
+
+
+feign:
+  url: https://wordle.votee.dev:8000
