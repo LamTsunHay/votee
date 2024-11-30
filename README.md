@@ -21,5 +21,3 @@ To make a random guess using the Wordle bot, you can send a GET request to the A
 ```bash
 curl -X GET http://localhost:8080/wordle/guess/random?seed=1234
 
-Sample request and response:
-![image](https://github.com/user-attachments/assets/b746ee2f-64dd-48db-b6c0-88346e8e1a8e)
