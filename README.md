@@ -21,3 +21,14 @@ To make a random guess using the Wordle bot, you can send a GET request to the A
 ```bash
 curl -X GET http://localhost:8080/wordle/guess/random?seed=1234
 
+## Logic
+In order to reduce the number of api calls needed to https://wordle.votee.dev:8000/random, I guess all the alphabets in ascending order to see if it is present in the secret word.
+
+for example of the secret word = "theft":
+The program will guess with "abcde", "fghij", "klmno", "pqrst", "uvwxy" and "z****"
+and found present letters: {e,f,h,t}
+
+Then guess the words with present letters.
+
+Worst scenerio will be (length of the word)^2
+
