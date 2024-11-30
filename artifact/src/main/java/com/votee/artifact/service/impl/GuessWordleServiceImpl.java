@@ -51,18 +51,19 @@ public class GuessWordleServiceImpl implements GuessWordleService {
             }
         }
 
-        for(int pos = 0; pos < ans.length ; pos++){
 
-            for(int i = 0; i < existChars.size(); i++){
-                if (ans[pos] == '*') {
-                    guessWords[pos] = existChars.get(i);
-                    List<CharacterGuessResult> characterGuessResults = voteeSourceClient.guessRandom(new String(guessWords), seed);
-                    if(characterGuessResults.get(pos).getResult().equals("correct")){
-                        ans[pos] = existChars.get(i);
-                        break;
-                    }
-                }
+        for(char c: existChars){
+            StringBuilder guessWordBuilder = new StringBuilder();
+            for(int i=0;i < 5; i++){
+                guessWordBuilder.append(c);
             }
+            List<CharacterGuessResult> characterGuessResults = voteeSourceClient.guessRandom(guessWordBuilder.toString(), seed);
+            characterGuessResults.forEach(characterGuess -> {
+                String result = characterGuess.getResult();
+                if(result.equals("correct")){
+                    ans[characterGuess.getSlot()] = characterGuess.getGuess().charAt(0);
+                }
+            });
         }
 
         return new String(ans);
