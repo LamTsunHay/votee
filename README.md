@@ -16,16 +16,19 @@ The bot interacts with the Wordle game API using the following endpoint:
 - Method: `GET`
 - Description: Provides a random guess for the Wordle game.
 
-## Logic
+## Alogorithm logic and analyze
 In order to reduce the number of api calls needed to https://wordle.votee.dev:8000/random, I guess all the alphabets in ascending order to see if it is present in the secret word.
 
 for example of the secret word = "theft":
 The program will guess with "abcde", "fghij", "klmno", "pqrst", "uvwxy" and "z****"
 and found present letters: {e,f,h,t}
 
-Then guess the words with present letters.
+Then guess the word with present letters: "eeeee", "fffff", "hhhhh", "ttttt".
+Save the character to the answer array if the letter is correct in position. 
 
-Worst scenerio will be (length of the word)^2
+Worst scenerio(5 distinct letters) will need (distinct number of character) + 5 = 10 calls of (https://wordle.votee.dev:8000/random)
+Time complexity: Disinict number of characters * length of the word
+Space complexity: length of the word
 
 ## Usage
 To make a random guess using the Wordle bot, you can send a GET request to the API endpoint. Here is an example using cURL:
